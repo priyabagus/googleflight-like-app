@@ -1,6 +1,6 @@
 import { Box, Button, Container, Typography } from '@mui/material'
 import css from './Home.page.module.scss'
-import BoxSearchFlight from './BoxSearchFlight'
+import BoxSearchFlight from './BoxSearchFlight/BoxSearchFlight'
 
 export default function MainPage () {
   return (
