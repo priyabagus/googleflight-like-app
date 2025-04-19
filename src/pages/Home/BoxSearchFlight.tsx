@@ -3,7 +3,7 @@ import css from './BoxSearchFlight.module.scss'
 import clsx from 'clsx'
 import { useState } from 'react'
 import FlightType from '../../lib/FlightType.type'
-import { flightTypeState } from '../../common/states'
+import { cabinClassState, flightTypeState } from '../../common/states'
 import { useAtom } from 'jotai'
 import { Add, ArrowDropDown, PersonOutline, Remove, TripOrigin } from '@mui/icons-material'
 import CabinClass from '../../lib/CabinClass.type'
@@ -13,6 +13,7 @@ export default function BoxSearchFlight () {
       <Stack direction='row'>
         <SelectFlightType />
         <PassengerOptions />
+        <SelectCabinClass />
       </Stack>
 
     </Box>
@@ -70,5 +71,17 @@ function PassengerItemOption (props:PassengerItemOptionProps) {
       <Typography>{props.label}</Typography>
       <Input className={css.passengerInput} type='number' size='small' inputProps={{ min: 0, max: 9 }} />
     </Stack>
+  )
+}
+
+function SelectCabinClass () {
+  const [cabinClass, setCabinClass] = useAtom(cabinClassState)
+  return (
+    <Select className={css.selectCabinClass} value={cabinClass} label='Cabin Class' onChange={(evt) => setCabinClass(evt.target.value as CabinClass)} autoWidth>
+      <MenuItem value='economy'>Economy</MenuItem>
+      <MenuItem value='premium_economy'>Premium Economy</MenuItem>
+      <MenuItem value='business'>Business</MenuItem>
+      <MenuItem value='first'>First Class</MenuItem>
+    </Select>
   )
 }

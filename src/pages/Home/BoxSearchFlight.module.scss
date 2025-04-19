@@ -14,6 +14,12 @@
     text-overflow: ellipsis;
 }
 
+.selectCabinClass {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .passengerWrapper {
     margin-top: 2rem;
 }
