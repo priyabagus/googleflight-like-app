@@ -1,6 +1,6 @@
 import { atom } from 'jotai'
-import FlightType from '../lib/FlightType.type'
-import CabinClass from '../lib/CabinClass.type'
+import FlightType from '../lib/types/FlightType.type'
+import CabinClass from '../lib/types/CabinClass.type'
 
 export const flightTypeState = atom<FlightType>('oneway')
 
