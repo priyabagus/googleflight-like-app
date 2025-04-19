@@ -5,10 +5,11 @@ import SelectCabinClass from './SelectCabinClass'
 import PassengerOptions from './PassengerOptions'
 import SelectAirport from './SelectAirport'
 import { SwapHoriz } from '@mui/icons-material'
+
 export default function BoxSearchFlight () {
   return (
-    <Box className={css.wrapper}>
-      <Stack className={css.stackOptions} direction='row'>
+    <Box className={css.boxSearchFlightWrapper}>
+      <Stack className={css.stackFlightOptionsWrapper} direction='row'>
         <SelectFlightType />
         <PassengerOptions />
         <SelectCabinClass />
