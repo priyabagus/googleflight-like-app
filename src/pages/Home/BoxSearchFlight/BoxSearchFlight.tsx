@@ -5,9 +5,13 @@ import SelectCabinClass from './SelectCabinClass'
 import PassengerOptions from './PassengerOptions'
 import SelectAirport from './SelectAirport'
 import { SwapHoriz } from '@mui/icons-material'
-import DatePickerDepartureDate from './DatePickerDepartureDate'
+import { useAtomValue } from 'jotai'
+import { flightTypeState } from '@/common/states'
+import DatePickerFlightDate from './DatePickerFlightDate'
 
 export default function BoxSearchFlight () {
+  const flightType = useAtomValue(flightTypeState)
+
   return (
     <Box className={css.boxSearchFlightWrapper}>
       <Stack className={css.stackFlightOptionsWrapper} direction='row'>
@@ -23,7 +27,8 @@ export default function BoxSearchFlight () {
       </Stack>
 
       <Stack className={css.stackFlightDateWrapper} direction='row'>
-        <DatePickerDepartureDate />
+        <DatePickerFlightDate type='departure' />
+        {flightType === 'roundtrip' && <DatePickerFlightDate type='return' />}
       </Stack>
     </Box>
   )
