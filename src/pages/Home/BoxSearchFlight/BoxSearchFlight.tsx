@@ -5,6 +5,7 @@ import SelectCabinClass from './SelectCabinClass'
 import PassengerOptions from './PassengerOptions'
 import SelectAirport from './SelectAirport'
 import { SwapHoriz } from '@mui/icons-material'
+import DatePickerDepartureDate from './DatePickerDepartureDate'
 
 export default function BoxSearchFlight () {
   return (
@@ -15,12 +16,15 @@ export default function BoxSearchFlight () {
         <SelectCabinClass />
       </Stack>
 
-      <Stack direction='row'>
+      <Stack className={css.stackFlightRouteWrapper} direction='row'>
         <SelectAirport type='origin' />
         <IconButton><SwapHoriz /></IconButton>
         <SelectAirport type='destination' />
       </Stack>
 
+      <Stack className={css.stackFlightDateWrapper} direction='row'>
+        <DatePickerDepartureDate />
+      </Stack>
     </Box>
   )
 }
