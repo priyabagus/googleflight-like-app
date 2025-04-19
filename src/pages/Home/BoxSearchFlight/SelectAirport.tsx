@@ -75,7 +75,7 @@ export default function SelectAirport (props:SelectAirportProps) {
 
   return (
     <Autocomplete
-      disablePortal options={options} filterOptions={filterOptions} sx={{ width: 300 }} onInputChange={handleInputChange}
+      disablePortal options={options} filterOptions={filterOptions} fullWidth onInputChange={handleInputChange}
       getOptionLabel={(option:Airport) => option.suggestionTitle}
       groupBy={(option:Airport) => option.country}
       noOptionsText={textNoOptions}
