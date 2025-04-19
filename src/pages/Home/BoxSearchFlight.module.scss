@@ -4,10 +4,25 @@
     margin-top: 2rem;
 }
 
-
+.popoverBox {
+    padding: 1rem;
+}
 
 .selectFlightType {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.passengerWrapper {
+    margin-top: 2rem;
+}
+
+.passengerInput {
+    margin-left: 1rem;
+    width: 5rem;
+
+    input {
+        text-align: center;
+    }
 }
