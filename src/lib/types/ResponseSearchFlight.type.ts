@@ -1,0 +1,54 @@
+import Itinerary from './Itineraries.type'
+
+type Carrier = {
+  id: number,
+  alternateId: string,
+  logoUrl: string,
+  name: string
+}
+type CityAirport = {
+  id: string,
+  entityId: string,
+  name: string
+}
+type FilterAirport = {
+  city: string,
+  airports: CityAirport[]
+}
+type ResponseSearchFlight = {
+  status: boolean
+  timestamp: number
+  sessionId: string
+  data: {
+    context: string
+    sessionId: string
+    totalResults: number
+    itineraries: Itinerary[]
+    filterStats: {
+      duration: {
+        min: number
+        max: number
+        multiCityMin: number
+        multiCityMax: number
+      },
+      airports: FilterAirport[]
+      carriers: Carrier[]
+      stopPrices: {
+        direct: {
+          formattedPrice: string
+          isPresent: boolean
+        }
+        one: {
+          formattedPrice: string
+          isPresent: boolean
+        }
+        twoOrMore: {
+          formattedPrice: string
+          isPresent: boolean
+        }
+      }
+    }
+  }
+}
+
+export default ResponseSearchFlight
