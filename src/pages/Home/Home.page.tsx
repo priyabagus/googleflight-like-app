@@ -4,7 +4,7 @@ import BoxSearchFlight from './BoxSearchFlight/BoxSearchFlight'
 
 export default function MainPage () {
   return (
-    <Container maxWidth='md'>
+    <Container maxWidth='md' disableGutters>
       <header>
         <img className={css.logo} src='/logo.svg' />
         <Typography className={css.title} variant='h1'>Bagus Flight</Typography>
