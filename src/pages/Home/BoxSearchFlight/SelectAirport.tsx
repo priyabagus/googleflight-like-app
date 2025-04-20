@@ -2,9 +2,9 @@ import Airport from '@/lib/types/Airport.type'
 import getCachedSearchAirports from '@/lib/utils/cache/getCachedSearchAirports'
 import setCachedSearchLocation from '@/lib/utils/cache/setCachedSearchAirports'
 import { Autocomplete, TextField } from '@mui/material'
-import { useState } from 'react'
+import { SyntheticEvent, useState } from 'react'
 import capitalize from 'lodash/capitalize'
-import { destinationAirportState, originAirportState } from '@/common/states'
+import { destinationAirportState, errorInputState, originAirportState } from '@/common/states'
 import { useAtom } from 'jotai'
 
 type SelectAirportProps = {
@@ -12,6 +12,7 @@ type SelectAirportProps = {
 }
 export default function SelectAirport (props:SelectAirportProps) {
   const [selectedAirport, setSelectedAirport] = useAtom(props.type === 'origin' ? originAirportState : destinationAirportState)
+  const [errorInput, setErrorInput] = useAtom(errorInputState)
 
   const [options, setOptions] = useState<any>([])
   const [textNoOptions, setTextNoOptions] = useState<string>('Type at least 3 characters')
@@ -85,15 +86,22 @@ export default function SelectAirport (props:SelectAirportProps) {
     }
   }
 
+  const handleChangeSelectedValue = (evt:SyntheticEvent<Element, Event>, newValue:Airport | null) => {
+    // set selected airport
+    setSelectedAirport(newValue)
+    // remove error
+    setErrorInput(latestState => ({ ...latestState, [props.type]: null }))
+  }
+
   return (
     <>
       <Autocomplete
         disablePortal options={options} filterOptions={filterOptions} onInputChange={handleInputChange} fullWidth
-        value={selectedAirport} onChange={(evt, newValue) => setSelectedAirport(newValue)}
+        value={selectedAirport} onChange={handleChangeSelectedValue}
         getOptionLabel={(option:Airport) => option.suggestionTitle}
         groupBy={(option:Airport) => option.country}
         noOptionsText={textNoOptions}
-        renderInput={(params) => <TextField {...params} label={capitalize(props.type)} />}
+        renderInput={(params) => <TextField {...params} required label={capitalize(props.type)} error={!!errorInput[props.type]} />}
       />
     </>
   )

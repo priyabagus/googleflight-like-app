@@ -5,23 +5,48 @@ import SelectCabinClass from './SelectCabinClass'
 import PassengerOptions from './PassengerOptions'
 import SelectAirport from './SelectAirport'
 import { SwapHoriz } from '@mui/icons-material'
-import { useAtom, useAtomValue } from 'jotai'
-import { departureDateTimestampState, flightTypeState, returnDateTimestampState } from '@/common/states'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { departureDateTimestampState, destinationAirportState, errorInputState, flightTypeState, originAirportState, returnDateTimestampState } from '@/common/states'
 import DatePickerFlightDate from './DatePickerFlightDate'
 import { useEffect } from 'react'
 
 export default function BoxSearchFlight () {
+  const originAirport = useAtomValue(originAirportState)
+  const destinationAirport = useAtomValue(destinationAirportState)
+  const departureDateTimestamp = useAtomValue(departureDateTimestampState)
+  const returnDateTimestamp = useAtomValue(returnDateTimestampState)
+  const flightType = useAtomValue(flightTypeState)
+  const setErrorInput = useSetAtom(errorInputState)
+
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault()
+    console.log('handle submit')
+
+    // validate
+    if (!originAirport) { setErrorInput(latestState => ({ ...latestState, origin: 'Please select valid origin airport' })) }
+    if (!destinationAirport) { setErrorInput(latestState => ({ ...latestState, destination: 'Please select valid destination airport' })) }
+    if (!departureDateTimestamp) { setErrorInput(latestState => ({ ...latestState, departure: 'Please select valid departure date' })) }
+    if (flightType === 'roundtrip' && !returnDateTimestamp) { setErrorInput(latestState => ({ ...latestState, return: 'Please select valid return date' })) }
+
+    // process if all inputs are okay
+    if (originAirport && destinationAirport && departureDateTimestamp && (flightType !== 'roundtrip' || returnDateTimestamp)) {
+      console.log('all inputs are okay')
+    }
+  }
+
   return (
     <Box className={css.boxSearchFlightWrapper}>
-      <StackFlightOptions />
+      <form onSubmit={handleSubmit}>
+        <StackFlightOptions />
 
-      <StackFlightRoute />
+        <StackFlightRoute />
 
-      <StackFlightDate />
+        <StackFlightDate />
 
-      <Box className={css.searchButtonWrapper}>
-        <Button variant='contained'>Search</Button>
-      </Box>
+        <Box className={css.searchButtonWrapper}>
+          <Button variant='contained' type='submit'>Search</Button>
+        </Box>
+      </form>
     </Box>
   )
 }
