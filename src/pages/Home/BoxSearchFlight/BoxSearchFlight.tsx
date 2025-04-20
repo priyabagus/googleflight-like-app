@@ -1,4 +1,4 @@
-import { Box, IconButton, Stack } from '@mui/material'
+import { Box, Button, IconButton, Stack } from '@mui/material'
 import css from './BoxSearchFlight.module.scss'
 import SelectFlightType from './SelectFlightType'
 import SelectCabinClass from './SelectCabinClass'
@@ -18,6 +18,10 @@ export default function BoxSearchFlight () {
       <StackFlightRoute />
 
       <StackFlightDate />
+
+      <Box className={css.searchButtonWrapper}>
+        <Button variant='contained'>Search</Button>
+      </Box>
     </Box>
   )
 }
