@@ -1,3 +1,3 @@
-type FlightType = 'oneway' | 'roundtrip' | 'multicity'
+type FlightType = 'oneway' | 'roundtrip'
 
 export default FlightType

@@ -10,7 +10,6 @@ export default function SelectFlightType () {
     <Select className={css.selectFlightType} value={flightType} label='Flight Type' onChange={(evt) => setFlightType(evt.target.value as FlightType)} autoWidth size='small'>
       <MenuItem value='oneway'>One way</MenuItem>
       <MenuItem value='roundtrip'>Round trip</MenuItem>
-      <MenuItem value='multicity'>Multi-city</MenuItem>
     </Select>
   )
 }
