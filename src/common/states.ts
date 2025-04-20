@@ -2,6 +2,7 @@ import { atom } from 'jotai'
 import FlightType from '../lib/types/FlightType.type'
 import CabinClass from '../lib/types/CabinClass.type'
 import dayjs from 'dayjs'
+import Airport from '@/lib/types/Airport.type'
 
 export const flightTypeState = atom<FlightType>('oneway')
 
@@ -10,6 +11,9 @@ export const childrenCountState = atom<number>(0)
 export const infantCountState = atom<number>(0)
 
 export const cabinClassState = atom<CabinClass>('economy')
+
+export const originAirportState = atom<Airport | null>(null)
+export const destinationAirportState = atom<Airport | null>(null)
 
 /** Departure date. By default it's 7 days from now */
 export const departureDateTimestampState = atom<number>(dayjs().add(7, 'days').valueOf())
