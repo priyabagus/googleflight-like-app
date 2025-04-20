@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, Stack } from '@mui/material'
+import { Box, IconButton, Stack } from '@mui/material'
 import css from './BoxSearchFlight.module.scss'
 import SelectFlightType from './SelectFlightType'
 import SelectCabinClass from './SelectCabinClass'
@@ -13,20 +13,32 @@ import { useEffect } from 'react'
 export default function BoxSearchFlight () {
   return (
     <Box className={css.boxSearchFlightWrapper}>
-      <Stack className={css.stackFlightOptionsWrapper} direction='row'>
-        <SelectFlightType />
-        <PassengerOptions />
-        <SelectCabinClass />
-      </Stack>
+      <StackFlightOptions />
 
-      <Stack className={css.stackFlightRouteWrapper} direction='row'>
-        <SelectAirport type='origin' />
-        <IconButton><SwapHoriz /></IconButton>
-        <SelectAirport type='destination' />
-      </Stack>
+      <StackFlightRoute />
 
       <StackFlightDate />
     </Box>
+  )
+}
+
+function StackFlightOptions () {
+  return (
+    <Stack className={css.stackFlightOptionsWrapper} direction='row'>
+      <SelectFlightType />
+      <PassengerOptions />
+      <SelectCabinClass />
+    </Stack>
+  )
+}
+
+function StackFlightRoute () {
+  return (
+    <Stack className={css.stackFlightRouteWrapper} direction='row'>
+      <SelectAirport type='origin' />
+      <IconButton><SwapHoriz /></IconButton>
+      <SelectAirport type='destination' />
+    </Stack>
   )
 }
 

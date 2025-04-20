@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import css from './Home.page.module.scss'
 import BoxSearchFlight from './BoxSearchFlight/BoxSearchFlight'
 
