@@ -9,12 +9,8 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { adultCountState, cabinClassState, childrenCountState, departureDateTimestampState, destinationAirportState, errorInputState, flightTypeState, infantCountState, originAirportState, returnDateTimestampState } from '@/common/states'
 import DatePickerFlightDate from './DatePickerFlightDate'
 import { useEffect, useState } from 'react'
-import querystring from 'query-string'
 import dayjs from 'dayjs'
-import Itinerary from '@/lib/types/Itineraries.type'
-import ResponseSearchFlight from '@/lib/types/ResponseSearchFlights.type'
 import searchFlights, { SearchFlightParam } from '@/lib/services/fetchRapidAPI/searchFlights'
-import pause from '@/lib/utils/time/pause'
 
 export default function BoxSearchFlight () {
   const originAirport = useAtomValue(originAirportState)
