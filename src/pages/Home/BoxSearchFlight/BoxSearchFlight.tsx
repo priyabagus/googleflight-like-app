@@ -12,7 +12,9 @@ import { useEffect, useState } from 'react'
 import querystring from 'query-string'
 import dayjs from 'dayjs'
 import Itinerary from '@/lib/types/Itineraries.type'
-import ResponseSearchFlight from '@/lib/types/ResponseSearchFlight.type'
+import ResponseSearchFlight from '@/lib/types/ResponseSearchFlights.type'
+import searchFlights, { SearchFlightParam } from '@/lib/services/fetchRapidAPI/searchFlights'
+import pause from '@/lib/utils/time/pause'
 
 export default function BoxSearchFlight () {
   const originAirport = useAtomValue(originAirportState)
@@ -40,10 +42,8 @@ export default function BoxSearchFlight () {
 
     // process if all inputs are okay
     if (originAirport && destinationAirport && departureDateTimestamp && (flightType !== 'roundtrip' || returnDateTimestamp)) {
-      console.log('all inputs are okay')
-
       // prepare query parameters for fetch API /searchFlight (v1)
-      const queryParam = {
+      const searchFlightParam:SearchFlightParam = {
         originSkyId: originAirport.skyId,
         destinationSkyId: destinationAirport.skyId,
         originEntityId: originAirport.entityId,
@@ -57,8 +57,7 @@ export default function BoxSearchFlight () {
       }
       // add return date if roundtrip
       if (flightType === 'roundtrip') {
-        type RoundTripQueryParam = typeof queryParam & { returnDate?: string }
-        (queryParam as RoundTripQueryParam).returnDate = dayjs(returnDateTimestamp).format('YYYY-MM-DD')
+        searchFlightParam.returnDate = dayjs(returnDateTimestamp).format('YYYY-MM-DD')
       }
 
       setIsLoading(true)
@@ -66,17 +65,7 @@ export default function BoxSearchFlight () {
       try {
         // fetch
         (async () => {
-          const url = `https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchFlights?${querystring.stringify(queryParam)}`
-          console.log('url:', url)
-          console.log('rapidapikey:', import.meta.env.VITE_RAPID_API_KEY)
-          const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-              'x-rapidapi-key': import.meta.env.VITE_RAPID_API_KEY,
-              'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com'
-            }
-          })
-          const result = await response.json() as ResponseSearchFlight
+          const result = await searchFlights(searchFlightParam)
           console.log(result)
           setIsLoading(false)
         })()

@@ -15,21 +15,25 @@ type FilterAirport = {
   city: string,
   airports: CityAirport[]
 }
-type ResponseSearchFlight = {
+
+/** Response of RapidAPI SearchFlight (version-1)  */
+type ResponseSearchFlights = {
   status: boolean
   timestamp: number
   sessionId: string
   data: {
-    context: string
-    sessionId: string
-    totalResults: number
+    context: {
+      sessionId?: string
+      status: string
+      totalResults: number
+    }
     itineraries: Itinerary[]
     filterStats: {
       duration: {
         min: number
         max: number
-        multiCityMin: number
-        multiCityMax: number
+        multiCityMin?: number
+        multiCityMax?: number
       },
       airports: FilterAirport[]
       carriers: Carrier[]
@@ -51,4 +55,4 @@ type ResponseSearchFlight = {
   }
 }
 
-export default ResponseSearchFlight
+export default ResponseSearchFlights

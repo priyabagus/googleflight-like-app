@@ -6,6 +6,7 @@ import { SyntheticEvent, useState } from 'react'
 import capitalize from 'lodash/capitalize'
 import { destinationAirportState, errorInputState, originAirportState } from '@/common/states'
 import { useAtom } from 'jotai'
+import searchAirports from '@/lib/services/fetchRapidAPI/searchAirports'
 
 type SelectAirportProps = {
   type: 'origin' | 'destination'
@@ -46,38 +47,14 @@ export default function SelectAirport (props:SelectAirportProps) {
             setTextNoOptions('Loading...')
 
             // do fetch
-            const url = `https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport?query=${value}`
-            const response = await fetch(url, {
-              method: 'GET',
-              headers: {
-                'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
-                'X-RapidAPI-Host': 'sky-scrapper.p.rapidapi.com'
-              }
-            })
-            const result = await response.json()
+            const airports = await searchAirports(value)
 
-            if (result.status === true) {
-              // map result into our Airport type
-              const airports: Airport[] = []
-              const skyAirports:any[] = result.data
-              skyAirports.forEach(skyAirport => {
-                airports.push({
-                  skyId: skyAirport.navigation.relevantFlightParams.skyId,
-                  entityId: skyAirport.entityId,
-                  title: skyAirport.presentation.title,
-                  suggestionTitle: skyAirport.presentation.suggestionTitle,
-                  entityType: skyAirport.navigation.entityType,
-                  country: skyAirport.presentation.subtitle
-                })
-              })
-
-              // save to cache
-              setCachedSearchLocation(value, airports)
-              // make it as our shown options
-              setOptions(airports)
-              // change no options text from "Loading..." to "No options" (if there is no options to be shown)
-              setTextNoOptions('No options')
-            }
+            // make it as our shown options
+            setOptions(airports)
+            // change no options text from "Loading..." to "No options" (if there is no options to be shown)
+            setTextNoOptions('No options')
+            // save to cache
+            setCachedSearchLocation(value, airports)
           })()
         }
       } catch (err) {
