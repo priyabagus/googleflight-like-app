@@ -2,8 +2,11 @@ import { Container, Typography } from '@mui/material'
 import css from './Home.page.module.scss'
 import BoxSearchFlight from './BoxSearchFlight/BoxSearchFlight'
 import BoxFlightResults from './BoxFlightResults/BoxFlightResults'
+import { useAtomValue } from 'jotai'
+import { isShownFlightResultsState } from '@/common/states'
 
 export default function MainPage () {
+  const isShownFlightResults = useAtomValue(isShownFlightResultsState)
   return (
     <Container maxWidth='md' disableGutters>
       <header>
@@ -13,7 +16,7 @@ export default function MainPage () {
 
       <BoxSearchFlight />
 
-      <BoxFlightResults />
+      {isShownFlightResults && <BoxFlightResults />}
 
     </Container>
   )

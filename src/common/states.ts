@@ -24,7 +24,7 @@ export const departureDateTimestampState = atom<number>(dayjs().add(7, 'days').v
 /** Return date. By default it's 4 days after departure date */
 export const returnDateTimestampState = atom<number>(dayjs().add(7 + 4, 'days').valueOf())
 
-export const isShownResultState = atom<boolean>(false)
+export const isShownFlightResultsState = atom<boolean>(false)
 
 export const itinerariesState = atom<Itinerary[]>(exampleResponseFlights.data.itineraries as Itinerary[])
 

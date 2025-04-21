@@ -6,7 +6,7 @@ import PassengerOptions from './PassengerOptions'
 import SelectAirport from './SelectAirport'
 import { SwapHoriz } from '@mui/icons-material'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
-import { adultCountState, cabinClassState, childrenCountState, departureDateTimestampState, destinationAirportState, errorInputState, flightTypeState, infantCountState, originAirportState, returnDateTimestampState } from '@/common/states'
+import { adultCountState, cabinClassState, childrenCountState, departureDateTimestampState, destinationAirportState, errorInputState, flightTypeState, infantCountState, isShownFlightResultsState, itinerariesState, originAirportState, returnDateTimestampState } from '@/common/states'
 import DatePickerFlightDate from './DatePickerFlightDate'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
@@ -23,6 +23,8 @@ export default function BoxSearchFlight () {
   const childrenCount = useAtomValue(childrenCountState)
   const infantCount = useAtomValue(infantCountState)
   const setErrorInput = useSetAtom(errorInputState)
+  const setIsShownFlightResults = useSetAtom(isShownFlightResultsState)
+  const setItineraries = useSetAtom(itinerariesState)
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -62,8 +64,10 @@ export default function BoxSearchFlight () {
         // fetch
         (async () => {
           const result = await searchFlights(searchFlightParam)
+          setItineraries(result.data.itineraries)
           console.log(result)
           setIsLoading(false)
+          setIsShownFlightResults(true)
         })()
       } catch (err) {
         console.error(err)
