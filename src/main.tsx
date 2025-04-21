@@ -11,7 +11,11 @@ import AppRoutes from './AppRoutes.tsx'
 import dayjs from 'dayjs'
 import durationPlugin from 'dayjs/plugin/duration'
 dayjs.extend(durationPlugin)
+/** end dayjs */
 
+/**
+ * customTheme for Material UI
+ * */
 let customTheme = createTheme({
   palette: {
     primary: {
@@ -38,6 +42,9 @@ let customTheme = createTheme({
 
 customTheme = responsiveFontSizes(customTheme)
 
+/**
+ * Root of our App
+ */
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={customTheme}>

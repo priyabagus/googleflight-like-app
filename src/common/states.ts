@@ -1,3 +1,8 @@
+/**
+ * @file This file contains app-wide business-logic state definition
+ * We are using Jotai for state management
+ */
+
 import { atom } from 'jotai'
 import FlightType from '../lib/types/FlightType.type'
 import CabinClass from '../lib/types/CabinClass.type'

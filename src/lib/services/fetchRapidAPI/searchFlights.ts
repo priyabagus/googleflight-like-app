@@ -17,6 +17,11 @@ export type SearchFlightParam = {
   returnDate?: string; // only add 'returnDate' if roundtrip
 }
 
+/**
+ * Fetch RapidAPI, looking for flights data based on specified parameter
+ * @param param
+ * @returns
+ */
 export default async function searchFlights (param:SearchFlightParam) : Promise<ResponseSearchFlight> {
   const maxRetry = 5
   let counter = 0

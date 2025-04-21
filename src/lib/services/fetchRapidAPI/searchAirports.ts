@@ -1,6 +1,11 @@
 import Airport from '@/lib/types/Airport.type'
 import ResponseSearchAirports from '@/lib/types/ResponseSearchAirports.type'
 
+/**
+ * Fetch RapidAPI, looking for airports data based on specified searched string
+ * @param searchedString
+ * @returns
+ */
 export default async function searchAirports (searchedString:string):Promise<Airport[]> {
   const url = `https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport?query=${searchedString}`
   const response = await fetch(url, {

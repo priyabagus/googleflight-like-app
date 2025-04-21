@@ -1,3 +1,8 @@
+/**
+ * @file This itinerary type is based on the itinerary's response data from RapidAPI. We take it as is.
+ * The reason why we take it as is, is because the itinerary data contains many informations that we may need in the future.
+ */
+
 type FlightSegment = {
   id: string,
   origin: {

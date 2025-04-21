@@ -5,7 +5,11 @@ import BoxFlightResults from './BoxFlightResults/BoxFlightResults'
 import { useAtomValue } from 'jotai'
 import { isShownFlightResultsState } from '@/common/states'
 
-export default function MainPage () {
+/**
+ * Home page component
+ * @returns
+ */
+export default function HomePage () {
   const isShownFlightResults = useAtomValue(isShownFlightResultsState)
   return (
     <Container maxWidth='md' disableGutters>

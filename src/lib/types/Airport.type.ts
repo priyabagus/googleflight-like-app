@@ -1,3 +1,6 @@
+/**
+ * Airport type used in our app. We take properties from RapidAPI that we need (not everything)
+ */
 type Airport = {
   skyId: string
   entityId: string,
