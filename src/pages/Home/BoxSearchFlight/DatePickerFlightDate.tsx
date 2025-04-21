@@ -23,6 +23,7 @@ export default function DatePickerFlightDate (props: DatePickerFlightDateProps) 
   return (
     <Box className={css.datePickerFlightDateWrapper}>
       <DatePicker
+        minDate={dayjs()}
         className={css.datePickerFlightDate} label={`${capitalize(props.type)} Date`} enableAccessibleFieldDOMStructure={false}
         value={dayjs(flightDate)} onChange={handleChange}
         slotProps={{ textField: { error: !!errorInput[props.type], required: true } }}
