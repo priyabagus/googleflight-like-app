@@ -10,6 +10,7 @@ import { adultCountState, cabinClassState, childrenCountState, departureDateTime
 import DatePickerFlightDate from './DatePickerFlightDate'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
+import cloneDeep from 'lodash/cloneDeep'
 import searchFlights, { SearchFlightParam } from '@/lib/services/fetchRapidAPI/searchFlights'
 
 export default function BoxSearchFlight () {
@@ -104,10 +105,18 @@ function StackFlightOptions () {
 }
 
 function StackFlightRoute () {
+  const [originAirport, setOriginAirport] = useAtom(originAirportState)
+  const [destinationAirport, setDestinationAirport] = useAtom(destinationAirportState)
+  const clonedOriginAirport = cloneDeep(originAirport)
+  const handleSwapOriginDestination = () => {
+    console.log('handleswap')
+    setOriginAirport(destinationAirport)
+    setDestinationAirport(clonedOriginAirport)
+  }
   return (
     <Stack className={css.stackFlightRouteWrapper} direction='row'>
       <SelectAirport type='origin' />
-      <IconButton><SwapHoriz /></IconButton>
+      <IconButton onClick={handleSwapOriginDestination}><SwapHoriz /></IconButton>
       <SelectAirport type='destination' />
     </Stack>
   )
