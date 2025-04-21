@@ -1,6 +1,7 @@
 import { Container, Typography } from '@mui/material'
 import css from './Home.page.module.scss'
 import BoxSearchFlight from './BoxSearchFlight/BoxSearchFlight'
+import BoxFlightResults from './BoxFlightResults/BoxFlightResults'
 
 export default function MainPage () {
   return (
@@ -11,6 +12,8 @@ export default function MainPage () {
       </header>
 
       <BoxSearchFlight />
+
+      <BoxFlightResults />
 
     </Container>
   )

@@ -4,6 +4,9 @@ import CabinClass from '../lib/types/CabinClass.type'
 import dayjs from 'dayjs'
 import Airport from '@/lib/types/Airport.type'
 import ErrorInput from '@/lib/types/ErrorInput.type'
+import Itinerary from '@/lib/types/Itinerary.type'
+
+import exampleResponseFlights from '@/lib/dummy/exampleResponseFlights.json'
 
 export const flightTypeState = atom<FlightType>('oneway')
 
@@ -22,6 +25,8 @@ export const departureDateTimestampState = atom<number>(dayjs().add(7, 'days').v
 export const returnDateTimestampState = atom<number>(dayjs().add(7 + 4, 'days').valueOf())
 
 export const isShownResultState = atom<boolean>(false)
+
+export const itinerariesState = atom<Itinerary[]>(exampleResponseFlights.data.itineraries as Itinerary[])
 
 /** Error Input */
 export const errorInputState = atom<ErrorInput>({ origin: null, destination: null, departure: null, return: null })

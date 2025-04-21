@@ -7,6 +7,11 @@ import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material'
 import { BrowserRouter } from 'react-router'
 import AppRoutes from './AppRoutes.tsx'
 
+/** dayjs */
+import dayjs from 'dayjs'
+import durationPlugin from 'dayjs/plugin/duration'
+dayjs.extend(durationPlugin)
+
 let customTheme = createTheme({
   palette: {
     primary: {

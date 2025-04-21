@@ -1,4 +1,4 @@
-import Itinerary from './Itineraries.type'
+import Itinerary from './Itinerary.type'
 
 type Carrier = {
   id: number,

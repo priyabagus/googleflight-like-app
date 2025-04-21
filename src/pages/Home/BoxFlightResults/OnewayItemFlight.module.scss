@@ -1,0 +1,65 @@
+@use '../../../common/variables.scss';
+
+.summaryWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+}
+
+.summaryColumn {
+    text-align: center;
+    align-self: center;
+}
+
+.logoAndRouteWrapper {
+    text-align: center;
+    flex-basis: 1;
+}
+
+.carrierNameWrapper {
+    align-self: center;
+    flex-basis: 1.5;
+    width: 25%;
+
+    @media screen and (max-width: variables.$max-xs) {
+        display: none;
+    }
+}
+
+.departAndArrivalWrapper {
+    text-align: center;
+    align-self: center;
+    flex-basis: 1;
+    
+    @media screen and (max-width: 480px) {
+        display: none;
+    }
+}
+
+.durationAndStopWrapper {
+    text-align: center;
+    align-self: center;
+    flex-basis: 1;
+}
+
+.priceWrapper {
+    align-self: center;
+    flex-basis: 3;
+}
+
+.route {
+    font-size: small;
+    color: grey;
+}
+
+.departArrivalDate {
+    font-size: small !important;
+    color: grey;
+}
+
+.price {
+    color: green;
+    font-weight: 500 !important;
+}
+
